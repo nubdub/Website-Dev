@@ -1,0 +1,39 @@
+head {
+    background-color: black;
+}
+
+.top {
+    background-image: url(http://paperlief.com/images/solid-color-backgrounds-wallpaper-2.jpg);
+    width: 100%;
+}
+
+h1 {
+    color:darkblue;
+}
+
+.arial {
+    font-family: cursive;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+    padding-left: 30px;
+}
+
+.top-buttons {
+    padding: 10px;
+    font-size: 25px;
+}
+
+.pad-left {
+    padding-left: 40px;
+}
+
+.pad-top {
+    padding-top: 50px;
+}
+
