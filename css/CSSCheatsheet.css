@@ -1,0 +1,64 @@
+h1 {
+    color: blue;
+    background-color: yellow;
+}
+
+body {
+    background-color: #f4f4f4;
+    color: #555555;
+    /*font-family: Arial, Helvita, sans-serif;*/
+    /*font-size: 21px;*/
+    /*font-weight: bold;*/
+    font: normal 16px Arial, Helvita, sans-serif;
+    line-height: 1.6em;
+    margin: 0;
+}
+
+.container {
+    width: 80%;
+    /*Auto margin keeps text at the center of page (responsive)*/
+    margin: auto;
+}
+
+.box-1 {
+    background-color: #333;
+    color: #fff;
+    border: 5px red solid;
+    padding: 20px;
+}
+
+.box-1 h1 {
+    font-family: Tahoma, serif;
+    font-weight: 900;
+    font-style: italic;
+    text-decoration: underline;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    word-spacing: 1em;
+}
+
+.box-2 {
+    border: 3px dotted #ccc;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.categories {
+    border: 1px #ccc solid;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.categories h2 {
+    text-align: center;
+}
+
+.categories ul {
+    padding: 0 0 0 20px;
+    list-style: square;
+}
+
+.categories li {
+    padding: 6px;
+    border-bottom: dotted 1px #333;
+}
