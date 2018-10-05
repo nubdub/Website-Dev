@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <title>Protein Synthesis Noise Exhibit</title>
 
+    <style>
+        .container {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+
     <script>
-    function drawCircle() {
-            var c = document.getElementById("myCanvas");
-            var ctx = c.getContext("2d");
-            ctx.strokeStyle = "#FF0000";
-            ctx.beginPath();
-            ctx.arc(200, 100, 50, 0, 2*Math.PI);
-            ctx.stroke();
+
+        function allowDrop(ev) {
+            ev.preventDefault();
         }
 
         function drag(ev) {
@@ -24,23 +30,21 @@
             ev.target.appendChild(document.getElementById(data));
         }
 
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
     </script>
 </head>
 
-<body onload="drawCircle()">
+<body>
 
     <!--<div id="nucleus" ondrop="#" ondragover="#">-->
 
     <!--</div>-->
 
-    <img style="max-width: 90px; height: auto;" src="images/green-blob-hi.png" draggable="true"
-    ondragstart="drag(event)"/>
+    <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="drag1" style="max-width: 90px; height: auto;" src="images/green-blob-hi.png" draggable="true" ondragstart="drag(event)"/>
+    </div>
+    <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
 
-    <canvas id="myCanvas" ondrop="drop(event)" ondragover="allowDrop(event)"></canvas>
+
 
 </body>
 </html>
