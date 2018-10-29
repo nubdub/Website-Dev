@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--Bootstrap.css 4-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--FontAwesome.css-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+</head>
+
+<body>
+    <section class="jumbotron bg-dark text-white mb-0">
+        <div class="container">
+            <h2>US Location Info</h2>
+            <h4 class="text-muted">Enter a zipcode to get location info</h4>
+            <form action="" class="mt-4" id="zipform">
+                <!--Input group keeps label and textbox aligned-->
+                <div class="input-group input-group-lg">
+                    <!--Adds a prepend box before the input box-->
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fas fa-map-pin"></i>
+                        </span>
+                    </div>
+                    <!--form-control makes the input box look nicer-->
+                    <input type="text"class="form-control" id="zip" placeholder="Enter Zipcode...">
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div class="container">
+        <div id="output">
+
+        </div>
+    </div>
+
+    <script>
+        document.querySelector('#zipform').addEventListener('submit', getLocationInfo);
+
+        function getLocationInfo(e) {
+            const zip = document.querySelector('#zip').value;
+            console.log(zip);
+            // Make a request (use template string with variables)
+            // Backwards quote
+            fetch(`https://api.zippopotam.us/us/${zip}`)
+                // What do you want to do with request
+                .then(function(response) {
+                    if (response.status != 200) {
+                        document.querySelector('#output').innerHTML =
+                            `<div class="alert alert-danger">Invalid zipcode, please try again</div>`;
+                        throw Error(response.statusText);
+                    }
+                    else {
+                        console.log(response);
+                        return response.json();
+                    }
+                }).then(
+                    data => {
+                        let output ='';
+                        data.places.forEach(place => {
+                            output += `<div class="card-header">
+                                            <div class="card-header">
+                                                <strong>Location Info</strong>
+                                                <button type="button" class="close" aria-label="Close" onclick="deleteLocation()">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul>
+                                                    <li class="list-group-item"><strong>City: </strong>${place['place name']}</li>
+                                                    <li class="list-group-item"><strong>State: </strong>${place['state']}</li>
+                                                    <li class="list-group-item"><strong>City: </strong>${place['longitude']}</li>
+                                                    <li class="list-group-item"><strong>City: </strong>${place['latitude']}</li>
+                                                </ul>
+                                            </div>
+                                       </div>`;
+                        });
+                        document.querySelector('#output').innerHTML = output;
+                    }).catch(err => console.log(err));
+
+            e.preventDefault();
+
+        }
+
+        function deleteLocation() {
+            document.querySelector('.card').remove();
+            document.querySelector('.zip').value = '';
+        }
+
+    </script>
+</body>
+
+</html>
