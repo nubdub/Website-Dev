@@ -16,6 +16,8 @@
 
     <script>
 
+        let rnaCounter = 0;
+
         function allowDrop(ev) {
             ev.preventDefault();
         }
@@ -35,7 +37,22 @@
             var nodeCopy = document.getElementById(data).cloneNode(true);
             nodeCopy.id = "newId" // Cannot use same ID
             ev.target.appendChild(nodeCopy);
-            document.getElementById("img-counter").innerHTML = document.images.length - 1 + "";
+            rnaCounter = document.images.length - 1 + "";
+            document.getElementById("img-counter").innerHTML = rnaCounter;
+        }
+
+        function dropRemove(ev) {
+            if (rnaCounter > 0) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                var node = document.getElementById(data);
+                node.parentNode.removeChild(node);
+                rnaCounter--;
+                document.getElementById("img-counter").innerHTML = rnaCounter;
+            }
+            else {
+                document.getElementById("img-counter").innerHTML = "You don't have any RNA to remove!"
+            }
         }
 
     </script>
@@ -48,14 +65,22 @@
     <!--</div>-->
 
     <h2>Toolkit</h2>
+
     <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)">
         <img id="drag1" style="max-width: 90px; height: auto;" src="images/green-blob-hi.png" draggable="true" ondragstart="drag(event)"/>
         <div>
             <h6>RNA Polymerase</h6>
         </div>
     </div>
+
     <h2>Nucleus</h2>
+
     <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+
+    <h3>Trash</h3>
+
+    <div class="container" ondrop="dropRemove(event)" ondragover="allowDrop(event)"></div>
+
     <p id="img-counter"></p>
 
 
